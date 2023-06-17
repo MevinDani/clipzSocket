@@ -32,16 +32,19 @@ io.on("connection", (socket) => {
         // console.log(users, 'adduser');
     })
 
+
     // send and get messages
-    socket.on("sendMessage", ({ senderId, receiverId, message }) => {
-        console.log(users, 'sndmsg');
-        console.log(senderId, receiverId, message);
+    socket.on("sendMessage", ({ senderId, receiverId, message, msgId, timestamp }) => {
+        // console.log(users, 'sndmsg');
+        // console.log(senderId, receiverId, message);
         const user = getUser(receiverId)
         // console.log(user);
         if (user) {
             io.to(user.socketId).emit("getMessage", {
                 senderId,
-                message
+                message,
+                msgId,
+                timestamp
             })
         }
     })
