@@ -60,6 +60,12 @@ io.on("connection", (socket) => {
         }
     })
 
+    socket.on("removeSocket", () => {
+        removeUser(socket.id)
+        console.log(users, "a user removeSocket");
+        io.emit("getUsers", users)
+    })
+
     // handle disconnect
     socket.on("disconnect", () => {
         removeUser(socket.id)
